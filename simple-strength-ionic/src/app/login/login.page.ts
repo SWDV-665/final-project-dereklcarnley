@@ -30,5 +30,4 @@ export class LoginPage implements OnInit {
         window.alert(error.message)
       })
   }
-
 }

@@ -13,6 +13,13 @@ export class DashboardPage implements OnInit {
     public authService: AuthenticationService
   ) { }
 
-  ngOnInit() {}
-
-}
+  ngOnInit() {
+      if (this.authService.isLoggedIn) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        console.log("User is logged in.")
+      } else {
+        console.log("No logged in user.")
+      }
+    };
+  }

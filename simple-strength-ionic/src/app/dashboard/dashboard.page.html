@@ -1,12 +1,72 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Dashboard</ion-title>
+    <ion-title>
+      Simple Strength
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <p>Hello, {{}}</p>
-  </ion-item>
-  <ion-button type="submit" (click)="authService.SignOut()" expand="block">Logout</ion-button>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <h3>Simple Strength</h3>
+    </ion-toolbar>
+  </ion-header>
+
+  <!--If user is logged in-->
+  <ng-template *ngIf="this.authService.isLoggedIn; else notLoggedIn">
+    <ion-button type="submit" (click)="authService.SignOut()" expand="block">Logout</ion-button>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Your Profile:</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>You're currently logged in as: <strong>USERNAME</strong></p>
+        <p>Sex: SEX</p>
+        <p>Age: AGE</p>
+        <p>Bodyweight: BODYWEIGHT</p>
+        <p>Fitness Level: FITNESS LEVEL</p>
+        <ion-button color="primary">Update Profile</ion-button>
+        <ion-button color="danger">Delete Profile</ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>One-Rep Maxes:</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <div>
+          <p>Bench Press: MAX</p>
+          <p>Deadlift: MAX</p>
+          <p>Overhead Press: MAX</p>
+          <p>Squat: MAX</p>
+          <p>Bent-Over Row: MAX</p>
+        </div>
+        <ion-button id="suggestMaxButton" color="primary">Suggest One-Rep Maxes</ion-button>
+        <ion-button id="setMaxButton" color="secondary">Manually Set One-Rep Maxes</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+
+  <!-- not logged in -->
+  <ng-template #notLoggedIn>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Welcome!</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <p>Before you can start tracking your workouts, you need to create a profile.</p>
+        <ion-button color="primary" [routerLink]="['/registration']">Register</ion-button>
+        <br>
+        <p>Already registered? Log in here:</p>
+        <ion-button color="secondary" [routerLink]="['/login']">Log In</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+
 </ion-content>

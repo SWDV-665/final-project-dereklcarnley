@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../../shared/authentication-service";
+import { AngularFireAuth } from "@angular/fire/auth";
 
 @Component({
   selector: 'app-registration',
@@ -12,6 +13,7 @@ export class RegistrationPage implements OnInit {
 
   constructor(
     public authService: AuthenticationService,
+    public ngFireAuth: AngularFireAuth,
     public router: Router
   ) { }
 
@@ -23,6 +25,7 @@ export class RegistrationPage implements OnInit {
       // Do something here
       this.authService.SendVerificationMail()
       this.router.navigate(['verify-email']);
+      
     }).catch((error) => {
       window.alert(error.message)
     })

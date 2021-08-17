@@ -45,7 +45,7 @@ export class AuthenticationService {
   SendVerificationMail() {
     return this.ngFireAuth.currentUser.then(u => u.sendEmailVerification())
     .then(() => {
-      this.router.navigate(['verify-email']);
+      this.router.navigate(['verify-email'])
     })
   }
 
@@ -73,7 +73,10 @@ export class AuthenticationService {
 
   // Sign in with Gmail
   GoogleAuth() {
-    return this.AuthLogin(new firebase.auth.GoogleAuthProvider());
+    return this.AuthLogin(new firebase.auth.GoogleAuthProvider())
+    .then(() => {
+      this.router.navigate(['dashboard']);
+    })
   }
 
   // Auth providers
