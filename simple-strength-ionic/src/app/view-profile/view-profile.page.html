@@ -36,13 +36,13 @@
 
       <ion-card-content>
         <div>
-          <p>Bench Press: {{ORM?.BenchMax}}</p>
-          <p>Deadlift: {{ORM?.DeadliftMax}}</p>
-          <p>Overhead Press: {{ORM?.OHPMax}}</p>
-          <p>Squat: {{ORM?.SquatMax}}</p>
-          <p>Bent-Over Row: {{ORM?.RowMax}}</p>
+          <p>Bench Press: {{ORMs?.BenchMax}}</p>
+          <p>Deadlift: {{ORMs?.DeadliftMax}}</p>
+          <p>Overhead Press: {{ORMs?.OHPMax}}</p>
+          <p>Squat: {{ORMs?.SquatMax}}</p>
+          <p>Bent-Over Row: {{ORMs?.RowMax}}</p>
         </div>
-        <ion-button id="suggestMaxButton" color="primary">Suggest One-Rep Maxes</ion-button>
+        <ion-button id="suggestMaxButton" color="primary" (click)="suggestMaxes()">Suggest One-Rep Maxes</ion-button>
         <ion-button id="setMaxButton" color="secondary">Manually Set One-Rep Maxes</ion-button>
         <ion-button id="deleteMaxButton" color="danger">Delete One-Rep Maxes</ion-button>
       </ion-card-content>

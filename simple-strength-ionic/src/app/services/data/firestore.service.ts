@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
 import { AuthenticationService } from 'src/shared/authentication-service';
 import { Profile } from '../../models/profiles.interface';
+import { ORM } from '../../models/one-rep-maxes.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -30,7 +31,7 @@ export class FirestoreService {
       FitnessLevel,
       Sex
     });
-   }
+  }
 
   getProfileData(id: string): Observable<Profile> {
     console.log("Getting Profile Data for User ID: " + id);
@@ -46,5 +47,30 @@ export class FirestoreService {
     }).catch((error) => {
       window.alert(error.message)
     })
+  }
+
+
+  createORM(
+    BenchMax: number,
+    DeadliftMax: number,
+    OHPMax: number,
+    RowMax: number,
+    SquatMax: number
+  ): Promise<void> { 
+    const id = this.authService.getUserID();
+    
+    return this.firestore.doc(`userORMs/${id}`).set({
+      id,
+      BenchMax,
+      DeadliftMax,
+      OHPMax,
+      RowMax,
+      SquatMax
+    });
+  }
+
+  getORMData(id: string): Observable<ORM> {
+    console.log("Getting ORM Data for User ID: " + id);
+    return this.firestore.collection('userORMs').doc<ORM>(id).valueChanges();
   }
 }
