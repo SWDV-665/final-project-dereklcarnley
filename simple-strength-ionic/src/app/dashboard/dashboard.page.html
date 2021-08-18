@@ -25,6 +25,18 @@
         <ion-button color="danger" (click)="authService.SignOut()">Log Out</ion-button>
       </ion-card-content>
     </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Profile</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>Your profile provides the information necessary to select the right training weight for you.</p>
+        <p>Make sure your profile is up-to-date, so you can start tracking your workouts!</p>
+        <ion-button color="primary" [routerLink]="['/view-profile']">View Profile</ion-button>
+      </ion-card-content>
+    </ion-card>
   </div>
 
   <!-- not logged in -->
@@ -35,11 +47,17 @@
       </ion-card-header>
     
       <ion-card-content>
-        <p>Before you can start tracking your workouts, you need to register and create a profile.</p>
-        <ion-button color="primary" [routerLink]="['/registration']">Register</ion-button>
+        <p>Simple Strength makes strength training easier by providing personalized weight 
+          suggestions and workout tracking. Create a profile, and get suggested one-rep 
+          maxes based on crowdsourced weightlifting standards from 
+          <a href="https://strengthlevel.com/strength-standards" target="blank">Strength Level</a>.
+        Once you've got your maxes, you're ready to track your workouts and start getting stronger!</p>
+        <br>
+        <p>To get started, you need to register and create a profile:</p>
+        <ion-button color="primary" expand="block" [routerLink]="['/registration']">Register</ion-button>
         <br>
         <p>Already registered? Log in here:</p>
-        <ion-button color="secondary" [routerLink]="['/login']">Log In</ion-button>
+        <ion-button color="secondary" expand="block" [routerLink]="['/login']">Log In</ion-button>
       </ion-card-content>
     </ion-card>
   </ng-template>
