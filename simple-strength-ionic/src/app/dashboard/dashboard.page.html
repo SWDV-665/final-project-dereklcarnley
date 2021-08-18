@@ -15,31 +15,31 @@
 
   <!--If user is logged in-->
   <div *ngIf="authService.isLoggedIn; else notLoggedIn">
-    <ion-button type="submit" (click)="authService.SignOut()" expand="block">Logout</ion-button>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Welcome!</ion-card-title>
+      </ion-card-header>
 
+      <ion-card-content>
+        <p>You're currently logged in as: <strong>{{authService.userData.email}}</strong></p>
+        <ion-button color="danger" (click)="authService.SignOut()">Log Out</ion-button>
+      </ion-card-content>
+    </ion-card>
+    
+    
     <ion-card>
       <ion-card-header>
         <ion-card-title>Your Profile:</ion-card-title>
       </ion-card-header>
 
       <ion-card-content>
-        <p>You're currently logged in as: <strong>{{authService.userData.email}}</strong></p>
-        
-        <div>
-          <p>Sex: {{Profile?.Sex}}</p>
-          <p>Age: {{Profile?.Age}}</p>
-          <p>Bodyweight: {{Profile?.Bodyweight}}</p>
-          <p>Fitness Level: {{Profile?.FitnessLevel}}</p>
-          <ion-button color="primary">Update Profile</ion-button>
-          <ion-button color="danger">Delete Profile</ion-button>
-        </div>
-
-        <ng-template>
-          <p>Before you can start tracking your workouts, you need to create a profile.</p>
-          <ion-button color="primary" [routerLink]="['/create-profile']">Create Profile</ion-button>
-        </ng-template>
-        
-        <ion-button color="danger" (click)="authService.SignOut()">Log Out</ion-button>
+        <p>Sex: {{profile?.Sex}}</p>
+        <p>Age: {{profile?.Age}}</p>
+        <p>Bodyweight: {{profile?.Bodyweight}}</p>
+        <p>Fitness Level: {{profile?.FitnessLevel}}</p>
+        <ion-button color="primary" [routerLink]="['/create-profile']">Create Profile</ion-button>
+        <ion-button color="secondary">Update Profile</ion-button>
+        <ion-button color="danger">Delete Profile</ion-button>
       </ion-card-content>
     </ion-card>
 
@@ -50,14 +50,15 @@
 
       <ion-card-content>
         <div>
-          <p>Bench Press: MAX</p>
-          <p>Deadlift: MAX</p>
-          <p>Overhead Press: MAX</p>
-          <p>Squat: MAX</p>
-          <p>Bent-Over Row: MAX</p>
+          <p>Bench Press: {{ORM?.BenchMax}}</p>
+          <p>Deadlift: {{ORM?.DeadliftMax}}</p>
+          <p>Overhead Press: {{ORM?.OHPMax}}</p>
+          <p>Squat: {{ORM?.SquatMax}}</p>
+          <p>Bent-Over Row: {{ORM?.RowMax}}</p>
         </div>
         <ion-button id="suggestMaxButton" color="primary">Suggest One-Rep Maxes</ion-button>
         <ion-button id="setMaxButton" color="secondary">Manually Set One-Rep Maxes</ion-button>
+        <ion-button id="deleteMaxButton" color="danger">Delete One-Rep Maxes</ion-button>
       </ion-card-content>
     </ion-card>
   </div>
