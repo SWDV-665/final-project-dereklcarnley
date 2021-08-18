@@ -23,12 +23,8 @@
         <p>Bodyweight: {{profile?.Bodyweight}}</p>
         <p>Fitness Level: {{profile?.FitnessLevel}}</p>
         <ion-button color="secondary" [routerLink]="['/create-profile']">Update</ion-button>
-        <ion-button color="danger">Delete</ion-button>
+        <ion-button color="danger" (click)="deleteProfile()">Delete</ion-button>
       </div>
-
-      <ng-template>
-        <ion-button color="primary" [routerLink]="['/create-profile']">Create Profile</ion-button>
-      </ng-template>
     </ion-card-content>
   </ion-card>
 

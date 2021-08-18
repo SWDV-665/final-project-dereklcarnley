@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import 'firebase/firestore';
 import { AuthenticationService } from 'src/shared/authentication-service';
@@ -10,7 +11,9 @@ import { Observable } from 'rxjs';
 })
 export class FirestoreService {
 
-  constructor(public firestore: AngularFirestore, public authService:AuthenticationService) { }
+  constructor(public firestore: AngularFirestore, 
+              public authService:AuthenticationService,
+              private router: Router) { }
 
   createProfile(
     Age: number,
@@ -29,8 +32,19 @@ export class FirestoreService {
     });
    }
 
-   getProfileData(id: string): Observable<Profile> {
+  getProfileData(id: string): Observable<Profile> {
     console.log("Getting Profile Data for User ID: " + id);
     return this.firestore.collection('userProfiles').doc<Profile>(id).valueChanges();
+  }
+
+  deleteProfileData(id: string): Promise<void> {
+    return this.firestore.doc(`userProfiles/${id}`).delete()
+    .then((res) => {
+      // Do something here
+      console.log("Profile deleted.")
+      this.router.navigate(['']);
+    }).catch((error) => {
+      window.alert(error.message)
+    })
   }
 }
