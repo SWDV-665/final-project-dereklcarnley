@@ -25,13 +25,19 @@
       <ion-card-content>
         <p>You're currently logged in as: <strong>{{authService.userData.email}}</strong></p>
         
-        <div *ngIf="profileCreated">
+        <div *ngIf="profileCreated; else noProfile">
           <p>Sex: SEX</p>
           <p>Age: AGE</p>
           <p>Bodyweight: BODYWEIGHT</p>
           <p>Fitness Level: FITNESS LEVEL</p>
           <ion-button color="primary">Update Profile</ion-button>
+          <ion-button color="danger">Delete Profile</ion-button>
         </div>
+
+        <ng-template #noProfile>
+          <p>Before you can start tracking your workouts, you need to create a profile.</p>
+          <ion-button color="primary">Create Profile</ion-button>
+        </ng-template>
         
         <ion-button color="danger" (click)="authService.SignOut()">Log Out</ion-button>
       </ion-card-content>
