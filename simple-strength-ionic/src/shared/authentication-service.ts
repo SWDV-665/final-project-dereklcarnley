@@ -97,7 +97,7 @@ export class AuthenticationService {
   GoogleAuth() {
     return this.AuthLogin(new firebase.auth.GoogleAuthProvider())
     .then(() => {
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['']);
     })
   }
 
@@ -133,7 +133,7 @@ export class AuthenticationService {
   SignOut() {
     return this.ngFireAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['login']);
+      this.router.navigate(['']);
     })
   }
 

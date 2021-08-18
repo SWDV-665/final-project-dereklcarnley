@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <h3>Profile</h3>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Your Profile:</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div>
+        <p>Sex: {{profile?.Sex}}</p>
+        <p>Age: {{profile?.Age}}</p>
+        <p>Bodyweight: {{profile?.Bodyweight}}</p>
+        <p>Fitness Level: {{profile?.FitnessLevel}}</p>
+        <ion-button color="secondary" [routerLink]="['/create-profile']">Update</ion-button>
+        <ion-button color="danger">Delete</ion-button>
+      </div>
+
+      <ng-template>
+        <ion-button color="primary" [routerLink]="['/create-profile']">Create Profile</ion-button>
+      </ng-template>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>One-Rep Maxes:</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div>
+        <p>Bench Press: {{ORM?.BenchMax}}</p>
+        <p>Deadlift: {{ORM?.DeadliftMax}}</p>
+        <p>Overhead Press: {{ORM?.OHPMax}}</p>
+        <p>Squat: {{ORM?.SquatMax}}</p>
+        <p>Bent-Over Row: {{ORM?.RowMax}}</p>
+      </div>
+      <ion-button id="suggestMaxButton" color="primary">Suggest One-Rep Maxes</ion-button>
+      <ion-button id="setMaxButton" color="secondary">Manually Set One-Rep Maxes</ion-button>
+      <ion-button id="deleteMaxButton" color="danger">Delete One-Rep Maxes</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
