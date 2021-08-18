@@ -6,11 +6,11 @@ import { AuthenticationService } from "../../shared/authentication-service";
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.page.html',
-  styleUrls: ['./profile.page.scss'],
+  selector: 'app-create-profile',
+  templateUrl: './create-profile.page.html',
+  styleUrls: ['./create-profile.page.scss'],
 })
-export class ProfilePage implements OnInit {
+export class CreateProfilePage implements OnInit {
 
   profileForm: FormGroup;
   //profile form error messages
