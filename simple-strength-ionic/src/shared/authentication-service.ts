@@ -29,6 +29,17 @@ export class AuthenticationService {
         JSON.parse(localStorage.getItem('user'));
       }
     })
+
+    this.ngFireAuth.authState.subscribe(async (user) => {
+      if (user) {
+         var isVerified = user.emailVerified;
+         if (isVerified) {
+            console.log('Email is verified');
+         } else {
+            console.log('Email is not verified');           
+         }
+       }
+    });
   }
 
   // Login in with email/password
@@ -59,10 +70,21 @@ export class AuthenticationService {
     })
   }
 
+  async reload() {
+    await (await this.ngFireAuth.currentUser).reload();
+  };
+  
+
   // Returns true when user is looged in
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    return (user !== null && user.emailVerified !== false) ? true : false;
+  //get isLoggedIn(): boolean {
+  //  const user = JSON.parse(localStorage.getItem('user'));
+  //  return (user !== null && user.emailVerified !== false) ? true : false;
+  //}
+
+  get isLoggedIn(): boolean { 
+    const user = this.userData;
+    if(user === null || user === undefined) return false
+    return user.emailVerified;
   }
 
   // Returns true when user's email is verified
@@ -115,4 +137,11 @@ export class AuthenticationService {
     })
   }
 
+  getUserID() {
+    return this.userData.uid;
+  }
+
+  getUserEmail() {
+    return this.userData.email;
+  }
 }

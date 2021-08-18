@@ -20,7 +20,8 @@
     </ion-item>
 
     <ion-row>
-      <ion-col> 
+      <ion-col>
+        <p>** Note: First login attempt does not detect verified email. Click 'login' again after the error message appears, and you will be logged in. Working on a fix for this.</p>
       <ion-button type="submit" (click)="logIn(email, password)" expand="block">Login</ion-button>
       </ion-col>
     </ion-row>
@@ -28,15 +29,17 @@
 
   <form>
     <ion-row>
-      <ion-col> 
-        <ion-button 
-         type="submit" 
-         color="danger"
-         (click)="authService.GoogleAuth()" 
-         expand="block">
-           Login with Google
+      <ion-col>
+        <ion-button type="success" color="primary" (click)="authService.GoogleAuth()" expand="block">
+          Login with Google
+          <ion-icon name="logo-google"></ion-icon>
         </ion-button>
       </ion-col>
     </ion-row>
   </form>
+
+  <div>
+    <p>Are you new here? Click here to register:</p>
+    <ion-button color="secondary" expand="block" [routerLink]="['/registration']">Register</ion-button>
+  </div>
 </ion-content>

@@ -7,9 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Dashboard', url: '/dashboard', icon: 'home' },
-    { title: 'Login', url: '/login', icon: 'log-in' },
-    { title: 'Register', url: '/registration', icon: 'person' }
+    { title: 'Dashboard', url: '/dashboard', icon: 'home' }
   ];
   
   constructor() {}
