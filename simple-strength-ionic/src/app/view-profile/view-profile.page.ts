@@ -47,7 +47,7 @@ export class ViewProfilePage implements OnInit {
           },
         },
         {
-          text: 'Yes',
+          text: 'Delete',
           handler: () => {
             this.firestoreService.deleteProfileData(id).then(() => {
               this.router.navigateByUrl('');

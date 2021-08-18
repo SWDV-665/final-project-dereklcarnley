@@ -70,11 +70,6 @@ export class AuthenticationService {
     })
   }
 
-  async reload() {
-    await (await this.ngFireAuth.currentUser).reload();
-  };
-  
-
   // Returns true when user is looged in
   //get isLoggedIn(): boolean {
   //  const user = JSON.parse(localStorage.getItem('user'));
@@ -133,7 +128,7 @@ export class AuthenticationService {
   SignOut() {
     return this.ngFireAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['']);
+      window.location.reload();
     })
   }
 
