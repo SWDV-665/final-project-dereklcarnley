@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="profileForm" (ngSubmit)="createProfile()" novalidate>
+    
+    <!-- Sex -->
+    <ion-item>
+      <ion-label>Sex</ion-label>
+      <ion-select formControlName="Sex" required>
+        <ion-select-option value="Female">Female</ion-select-option>
+        <ion-select-option value="Male">Male</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.Sex">
+        <div class="error-message" *ngIf="profileForm.get('Sex').hasError(validation.type) && (profileForm.get('Sex').dirty || profileForm.get('Sex').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Age -->
+    <ion-item>
+      <ion-label position="floating">Age</ion-label>
+      <ion-input formControlName="Age" type="number" min="14" max="89" required></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.Age">
+        <div class="error-message" *ngIf="profileForm.get('Age').hasError(validation.type) && (profileForm.get('Age').dirty || profileForm.get('Age').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Bodyweight -->
+    <ion-item>
+      <ion-label position="floating">Bodyweight</ion-label>
+      <ion-input formControlName="Bodyweight" type="number" min="90" max="310" required></ion-input>
+    </ion-item><br>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.Bodyweight">
+        <div class="error-message" *ngIf="profileForm.get('Bodyweight').hasError(validation.type) && (profileForm.get('Bodyweight').dirty || profileForm.get('Bodyweight').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Fitness Level -->
+    <ion-item>
+      <ion-label>Fitness Level</ion-label>
+      <ion-select formControlName="FitnessLevel" required>
+        <ion-select-option value="Beginner">Beginner</ion-select-option>
+        <ion-select-option value="Novice">Novice</ion-select-option>
+        <ion-select-option value="Intermediate">Intermediate</ion-select-option>
+        <ion-select-option value="Advanced">Advanced</ion-select-option>
+        <ion-select-option value="Elite">Elite</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <br>
+
+    <!-- Submit -->
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="primary" expand="block">Create Profile</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+
+</ion-content>

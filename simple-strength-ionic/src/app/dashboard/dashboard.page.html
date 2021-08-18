@@ -36,7 +36,7 @@
 
         <ng-template #noProfile>
           <p>Before you can start tracking your workouts, you need to create a profile.</p>
-          <ion-button color="primary">Create Profile</ion-button>
+          <ion-button color="primary" [routerLink]="['/profile']">Create Profile</ion-button>
         </ng-template>
         
         <ion-button color="danger" (click)="authService.SignOut()">Log Out</ion-button>
@@ -70,7 +70,7 @@
       </ion-card-header>
     
       <ion-card-content>
-        <p>Before you can start tracking your workouts, you need to create a profile.</p>
+        <p>Before you can start tracking your workouts, you need to register and create a profile.</p>
         <ion-button color="primary" [routerLink]="['/registration']">Register</ion-button>
         <br>
         <p>Already registered? Log in here:</p>
