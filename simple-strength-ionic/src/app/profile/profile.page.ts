@@ -9,14 +9,6 @@ import { AuthenticationService } from "../../shared/authentication-service";
 })
 export class ProfilePage implements OnInit {
 
-  tempUser = {
-    uid:null,
-    Sex:null,
-    Age:0,
-    Bodyweight:0,
-    FitnessLevel:null
-  };
-
   profileForm: FormGroup;
   //profile form error messages
   validation_messages = {
@@ -63,15 +55,11 @@ export class ProfilePage implements OnInit {
       return false;
     } else {
       //user id
-      this.tempUser.uid = this.authService.getUserID();
-      console.log("Creating Profile for user: " + this.tempUser.uid);
+      var temp = this.authService.getUserID();
+      console.log("Creating Profile for user: " + temp);
     
       //user inputs from profile form
       console.log(this.profileForm.value)
-      this.tempUser.Sex = this.profileForm.value["Sex"];
-      this.tempUser.Age = this.profileForm.value["Age"];
-      this.tempUser.Bodyweight = this.profileForm.value["Bodyweight"];
-      this.tempUser.FitnessLevel = this.profileForm.value["FitnessLevel"];
     }
   };
 }
