@@ -38,6 +38,10 @@ const routes: Routes = [
   {
     path: 'workout-tracking',
     loadChildren: () => import('./workout-tracking/workout-tracking.module').then( m => m.WorkoutTrackingPageModule)
+  },
+  {
+    path: 'workout-strength',
+    loadChildren: () => import('./workout-strength/workout-strength.module').then( m => m.WorkoutStrengthPageModule)
   }
 ];
 

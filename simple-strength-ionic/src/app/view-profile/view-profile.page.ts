@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from "../../shared/authentication-service";
 import { Profile } from '../models/profiles.interface';
 import { FirestoreService } from '../services/data/firestore.service';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { LoadingService } from '../services/ui/loading.service';
+import { AlertController } from '@ionic/angular';
 import { ORM } from '../models/one-rep-maxes.interface';
 
 import * as BenchStandards from "../data/bench-standards.json";
@@ -35,12 +36,12 @@ export class ViewProfilePage implements OnInit {
     private router: Router,
     private firestoreService: FirestoreService,
     private alertCtrl: AlertController,
-    private loadingCtrl: LoadingController
+    private loadingService: LoadingService
   ) { }
 
   async ngOnInit() {
     if (this.authService.isLoggedIn) {
-      this.presentLoading('Loading your profile...');
+      this.loadingService.presentLoading('Loading your profile...');
       //get user id from authService
       const id: string = this.authService.getUserID();
       //get profile data from firestore
@@ -52,15 +53,6 @@ export class ViewProfilePage implements OnInit {
     } else {
       console.log("No logged in user.")
     }
-  }
-
-  async presentLoading(message:string="Please wait...", duration:number=500) {
-    const loading = await this.loadingCtrl.create({
-      cssClass: 'my-custom-class',
-      message: message,
-      duration: duration
-    });
-    await loading.present();
   }
 
   async deleteProfile():Promise<void> {
@@ -86,7 +78,6 @@ export class ViewProfilePage implements OnInit {
         },
       ],
     });
-  
     await alert.present();
   }
 
@@ -141,8 +132,6 @@ export class ViewProfilePage implements OnInit {
           //round bodyweight to nearest 10
           bodyweight = this.roundToNearestTen(this.profile.Bodyweight);
         };
-      
-      var loading = await this.loadingCtrl.create();
         
       console.log("Getting bench press max...");
       console.log(this.BenchStandards[sex][bodyweight][fitnessLevel]);
@@ -164,20 +153,9 @@ export class ViewProfilePage implements OnInit {
       console.log(this.SquatStandards[sex][bodyweight][fitnessLevel]);
       var squatMax = this.accountForAge(this.SquatStandards[sex][bodyweight][fitnessLevel]);
     
-      this.firestoreService
-        .createORM(benchMax, deadliftMax, ohpMax, rowMax, squatMax)
-        .then(
-          () => {
-            loading.dismiss()
-          },
-          error => {
-            loading.dismiss().then(() => {
-              console.error(error);
-            });
-          }
-        );
+      this.loadingService.presentLoading('Setting One-Rep Maxes...');
+      this.firestoreService.createORM(benchMax, deadliftMax, ohpMax, rowMax, squatMax);
       }
-      return await loading.present();
     }
 
     async deleteMaxes():Promise<void> {

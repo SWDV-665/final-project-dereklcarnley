@@ -13,6 +13,9 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 
+import { FormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -20,7 +23,10 @@ import { environment } from '../environments/environment';
             AngularFireModule.initializeApp(environment.firebaseConfig),
             AngularFireAuthModule,
             AngularFireDatabaseModule,
-            AngularFirestoreModule],
+            AngularFirestoreModule,
+            FormsModule,
+            ReactiveFormsModule
+          ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
               AngularFirestoreModule],
   bootstrap: [AppComponent],

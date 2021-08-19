@@ -1,0 +1,180 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Workout Tracking - Strength</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <h3>Workout Tracking - Strength</h3>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="strengthWorkoutForm" (ngSubmit)="finishStrengthWorkout()">
+    <ion-list>
+      <!----------------------------------------------------->
+      <!-------------------- BENCH PRESS -------------------->
+      <!----------------------------------------------------->
+      <ion-radio-group formControlName="benchResponse">
+        <ion-item button (click)="toggleBenchDiv()" detail detail-icon="chevron-down">
+          <ion-list-header>
+            <ion-label><h1><strong>Bench Press:</strong></h1><h2>{{(plateIncrementRound(ORMs?.BenchMax * 0.85))}} pounds - 3 sets of 2-6 reps</h2></ion-label>
+          </ion-list-header>
+        </ion-item>
+        <div [hidden]="benchDiv">
+          <ion-item>
+            <ion-label>Completed!</ion-label>
+            <ion-radio name="benchResponse" slot="start" color="success" value="1"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Almost There!</ion-label>
+            <ion-radio name="benchResponse" slot="start" color="warning" value="2"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Too Heavy...</ion-label>
+            <ion-radio name="benchResponse" slot="start" color="danger" value="3"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Did Not Attempt</ion-label>
+            <ion-radio name="benchResponse" slot="start" color="medium" value="0"></ion-radio>
+          </ion-item>
+        </div>
+      </ion-radio-group>
+
+      <!----------------------------------------------------->
+      <!---------------------- DEADLIFT --------------------->
+      <!----------------------------------------------------->
+      <ion-radio-group formControlName="deadliftResponse">
+        <ion-item button (click)="toggleDeadliftDiv()" detail detail-icon="chevron-down">
+          <ion-list-header>
+            <ion-label><h1><strong>Deadlift:</strong></h1><h2>{{(plateIncrementRound(ORMs?.DeadliftMax * 0.85))}} pounds - 3 sets of 2-6 reps</h2></ion-label>
+          </ion-list-header>
+        </ion-item>
+        <div [hidden]="deadliftDiv">
+          <ion-item>
+            <ion-label>Completed!</ion-label>
+            <ion-radio name="deadliftResponse" slot="start" color="success" value="1"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Almost There!</ion-label>
+            <ion-radio name="deadliftResponse" slot="start" color="warning" value="2"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Too Heavy...</ion-label>
+            <ion-radio name="deadliftResponse" slot="start" color="danger" value="3"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Did Not Attempt</ion-label>
+            <ion-radio name="deadliftResponse" slot="start" color="medium" value="0" checked></ion-radio>
+          </ion-item>
+        </div>
+      </ion-radio-group>
+
+      <!----------------------------------------------------->
+      <!------------------- OVERHEAD PRESS ------------------>
+      <!----------------------------------------------------->
+      <ion-radio-group formControlName="ohpResponse">
+        <ion-item button (click)="toggleOHPDiv()" detail detail-icon="chevron-down">
+          <ion-list-header>
+            <ion-label><h1><strong>Overhead Press:</strong></h1><h2>{{(plateIncrementRound(ORMs?.OHPMax * 0.85))}} pounds - 3 sets of 2-6 reps</h2></ion-label>
+          </ion-list-header>
+        </ion-item>
+        <div [hidden]="ohpDiv">
+          <ion-item>
+            <ion-label>Completed!</ion-label>
+            <ion-radio name="ohpResponse" slot="start" color="success" value="1"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Almost There!</ion-label>
+            <ion-radio name="ohpResponse" slot="start" color="warning" value="2"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Too Heavy...</ion-label>
+            <ion-radio name="ohpResponse" slot="start" color="danger" value="3"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Did Not Attempt</ion-label>
+            <ion-radio name="ohpResponse" slot="start" color="medium" value="0"></ion-radio>
+          </ion-item>
+        </div>
+      </ion-radio-group>
+
+      <!----------------------------------------------------->
+      <!------------------------- SQUAT --------------------->
+      <!----------------------------------------------------->
+      <ion-radio-group formControlName="squatResponse">
+        <ion-item button (click)="toggleSquatDiv()" detail detail-icon="chevron-down">
+          <ion-list-header>
+            <ion-label><h1><strong>Squat:</strong></h1><h2>{{(plateIncrementRound(ORMs?.SquatMax * 0.85))}} pounds - 3 sets of 2-6 reps</h2></ion-label>
+          </ion-list-header>
+        </ion-item>
+        <div [hidden]="squatDiv">
+          <ion-item>
+            <ion-label>Completed!</ion-label>
+            <ion-radio name="squatResponse" slot="start" color="success" value="1"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Almost There!</ion-label>
+            <ion-radio name="squatResponse" slot="start" color="warning" value="2"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Too Heavy...</ion-label>
+            <ion-radio name="squatResponse" slot="start" color="danger" value="3"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Did Not Attempt</ion-label>
+            <ion-radio name="squatResponse" slot="start" color="medium" value="0"></ion-radio>
+          </ion-item>
+        </div>
+      </ion-radio-group>
+
+      <!----------------------------------------------------->
+      <!-------------------------- ROW ---------------------->
+      <!----------------------------------------------------->
+      <ion-radio-group formControlName="rowResponse">
+        <ion-item button (click)="toggleRowDiv()" detail detail-icon="chevron-down">
+          <ion-list-header>
+            <ion-label><h1><strong>Bent-Over Row:</strong></h1><h2>{{(plateIncrementRound(ORMs?.RowMax * 0.85))}} pounds - 3 sets of 2-6 reps</h2></ion-label>
+          </ion-list-header>
+        </ion-item>
+        <div [hidden]="rowDiv">
+          <ion-item>
+            <ion-label>Completed!</ion-label>
+            <ion-radio name="rowResponse" slot="start" color="success" value="1"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Almost There!</ion-label>
+            <ion-radio name="rowResponse" slot="start" color="warning" value="2"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Too Heavy...</ion-label>
+            <ion-radio name="rowResponse" slot="start" color="danger" value="3"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Did Not Attempt</ion-label>
+            <ion-radio name="rowResponse" slot="start" color="medium" value="0"></ion-radio>
+          </ion-item>
+        </div>
+      </ion-radio-group>
+    </ion-list>
+    <ion-button type="submit" color="primary" size="large" expand="block">Finish Workout</ion-button>
+    <ion-button color="secondary" expand="block" [routerLink]="['']">Back to Dashboard</ion-button>
+  </form>
+
+</ion-content>
