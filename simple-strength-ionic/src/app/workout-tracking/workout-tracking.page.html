@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Workout Tracking</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <h3>Workout Tracking</h3>
+    </ion-toolbar>
+  </ion-header>
+
+  <div *ngIf="authService.isLoggedIn; else notLoggedIn">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Select a Workout Goal:</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div style="text-align: center;">
+          <h1>Strength</h1>
+          <p>Lift heavy weights for a low rep range. Over time, strength-focused workouts maximize muscle power.
+            Strength workouts are ideal for those trying to lose body fat via body recomposition.</p>
+          <ion-button color="primary" size="large "expand="block">Start a Strength Workout</ion-button>
+          <ion-item-divider></ion-item-divider><br>
+
+          <h1>Hypertrophy</h1>
+          <p>Lift medium-heavy weights with a medium rep range. 
+            Consistent hypertrophy-focused workouts build larger, more aesthetic muscles.
+            This goal is a good fit for lifters with low body fat 
+            who want to look bigger while still gaining some strength.</p>
+          <ion-button color="secondary" size="large "expand="block">Start a Hypertrophy Workout</ion-button>
+          <ion-item-divider></ion-item-divider><br>
+
+          <h1>General Fitness</h1>
+          <p>Lift medium-light weights with a high rep range. 
+            This type of workout builds lean, aerobically capable muscles.
+            General fitness strength training builds muscular endurance, improves posture and stability, 
+            and helps with daily function.</p>
+          <ion-button color="tertiary" size="large "expand="block">Start a General Fitness Workout</ion-button>
+        </div>
+      </ion-card-content> 
+    </ion-card>
+  </div>
+
+  <!-- not logged in -->
+  <ng-template #notLoggedIn>
+    <ion-card>
+      <ion-card-content>
+        <p>You'll need to be logged in before you can track workouts.</p>
+        <br>
+        <p>Click here to register:</p>
+        <ion-button color="primary" expand="block" [routerLink]="['/registration']">Register</ion-button>
+        <br>
+        <p>Already registered? Log in here:</p>
+        <ion-button color="secondary" expand="block" [routerLink]="['/login']">Log In</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
+
+</ion-content>

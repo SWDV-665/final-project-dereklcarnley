@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'view-profile',
     loadChildren: () => import('./view-profile/view-profile.module').then( m => m.ViewProfilePageModule)
+  },
+  {
+    path: 'workout-tracking',
+    loadChildren: () => import('./workout-tracking/workout-tracking.module').then( m => m.WorkoutTrackingPageModule)
   }
 ];
 
