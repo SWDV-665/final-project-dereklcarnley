@@ -70,12 +70,6 @@ export class AuthenticationService {
     })
   }
 
-  // Returns true when user is looged in
-  //get isLoggedIn(): boolean {
-  //  const user = JSON.parse(localStorage.getItem('user'));
-  //  return (user !== null && user.emailVerified !== false) ? true : false;
-  //}
-
   get isLoggedIn(): boolean { 
     const user = this.userData;
     if(user === null || user === undefined) return false

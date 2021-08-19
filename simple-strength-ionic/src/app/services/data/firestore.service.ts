@@ -49,7 +49,6 @@ export class FirestoreService {
     })
   }
 
-
   createORM(
     BenchMax: number,
     DeadliftMax: number,
@@ -72,5 +71,16 @@ export class FirestoreService {
   getORMData(id: string): Observable<ORM> {
     console.log("Getting ORM Data for User ID: " + id);
     return this.firestore.collection('userORMs').doc<ORM>(id).valueChanges();
+  }
+
+  deleteORMData(id: string): Promise<void> {
+    return this.firestore.doc(`userORMs/${id}`).delete()
+    .then((res) => {
+      // Do something here
+      console.log("ORM data deleted.")
+      this.router.navigate(['']);
+    }).catch((error) => {
+      window.alert(error.message)
+    })
   }
 }

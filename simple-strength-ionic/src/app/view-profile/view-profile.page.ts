@@ -19,8 +19,8 @@ import * as SquatStandards from "../data/squat-standards.json";
 })
 export class ViewProfilePage implements OnInit {
 
+  //imports for accessing user data
   public profile: Profile;
-
   public ORMs: ORM;
 
   //JSON file imports for strength standards
@@ -38,8 +38,9 @@ export class ViewProfilePage implements OnInit {
     private loadingCtrl: LoadingController
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     if (this.authService.isLoggedIn) {
+      this.presentLoading('Loading your profile...');
       //get user id from authService
       const id: string = this.authService.getUserID();
       //get profile data from firestore
@@ -51,6 +52,15 @@ export class ViewProfilePage implements OnInit {
     } else {
       console.log("No logged in user.")
     }
+  }
+
+  async presentLoading(message:string="Please wait...", duration:number=500) {
+    const loading = await this.loadingCtrl.create({
+      cssClass: 'my-custom-class',
+      message: message,
+      duration: duration
+    });
+    await loading.present();
   }
 
   async deleteProfile():Promise<void> {
@@ -101,16 +111,17 @@ export class ViewProfilePage implements OnInit {
     else {return max};
   }
 
+  /*------
+  Suggest ORMs based on Strength Level's crowdsourced standards.
+  Great for beginners who don't know what weight to start with.
+  -------*/
   async suggestMaxes() {
       console.log("Getting suggested one-rep maxes...");
-      if (this.profile.Sex == null || 
-          this.profile.Bodyweight == null || 
-          this.profile.FitnessLevel == null ||
-          this.profile.Age == null) {
+      if (this.profile.Sex == null || this.profile.Bodyweight == null || 
+          this.profile.FitnessLevel == null || this.profile.Age == null) {
         console.log("Insufficient data to suggest maxes. Please update profile");
         return false;
       } else {
-          var age = this.profile.Age;
           var fitnessLevel = this.profile.FitnessLevel;
           var sex = this.profile.Sex;
           
@@ -157,9 +168,7 @@ export class ViewProfilePage implements OnInit {
         .createORM(benchMax, deadliftMax, ohpMax, rowMax, squatMax)
         .then(
           () => {
-            loading.dismiss().then(() => {
-              this.router.navigateByUrl['/view-profile'];
-            });
+            loading.dismiss()
           },
           error => {
             loading.dismiss().then(() => {
@@ -171,4 +180,93 @@ export class ViewProfilePage implements OnInit {
       return await loading.present();
     }
 
+    async deleteMaxes():Promise<void> {
+      const id = this.authService.getUserID();
+  
+      const alert = await this.alertCtrl.create({
+        message: `Are you sure you want to delete your ORM data?`,
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: blah => {
+              console.log('Confirm Cancel: blah');
+            },
+          },
+          {
+            text: 'Delete',
+            handler: () => {
+              this.firestoreService.deleteORMData(id).then(() => {
+                this.router.navigateByUrl('');
+              });
+            },
+          },
+        ],
+      });
+      await alert.present();
   }
+
+  /*------
+  Manually set maxes with an alert-input prompt.
+  Useful for experienced lifters who have above- or below-average maxes in certain lifts.
+  -------*/
+  async manuallySetMaxes() {
+    const alert = await this.alertCtrl.create({
+      cssClass: 'my-custom-class',
+      header: 'Set Maxes:',
+      inputs: [
+        {
+          name: 'benchMax',
+          type: 'number',
+          min: 0,
+          placeholder: 'Bench Press'
+        },
+        {
+          name: 'deadliftMax',
+          type: 'number',
+          min: 0,
+          placeholder: 'Deadlift'
+        },
+        {
+          name: 'ohpMax',
+          type: 'number',
+          min: 0,
+          placeholder: 'Overhead Press' 
+        },
+        {
+          name: 'rowMax',
+          type: 'number',
+          min: 0,
+          placeholder: 'Bent-Over Row'
+        },
+        // input date with min & max
+        {
+          name: 'squatMax',
+          type: 'number',
+          min: 0,
+          placeholder: 'Squat' 
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Confirm',
+          handler: (alertData) => {
+            console.log('Confirmed');
+            this.firestoreService.createORM(alertData.benchMax, alertData.deadliftMax, 
+                                            alertData.ohpMax, alertData.rowMax, alertData.squatMax);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+}

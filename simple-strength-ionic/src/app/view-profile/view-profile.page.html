@@ -39,12 +39,12 @@
           <p>Bench Press: {{ORMs?.BenchMax}}</p>
           <p>Deadlift: {{ORMs?.DeadliftMax}}</p>
           <p>Overhead Press: {{ORMs?.OHPMax}}</p>
-          <p>Squat: {{ORMs?.SquatMax}}</p>
           <p>Bent-Over Row: {{ORMs?.RowMax}}</p>
+          <p>Squat: {{ORMs?.SquatMax}}</p>
         </div>
-        <ion-button id="suggestMaxButton" color="primary" (click)="suggestMaxes()">Suggest One-Rep Maxes</ion-button>
-        <ion-button id="setMaxButton" color="secondary">Manually Set One-Rep Maxes</ion-button>
-        <ion-button id="deleteMaxButton" color="danger">Delete One-Rep Maxes</ion-button>
+        <ion-button id="suggestMaxButton" color="primary" (click)="suggestMaxes()">Suggest ORMs</ion-button>
+        <ion-button id="setMaxButton" color="secondary" (click)="manuallySetMaxes()">Manually Set ORMs</ion-button>
+        <ion-button id="deleteMaxButton" color="danger" (click)="deleteMaxes()">Delete</ion-button>
       </ion-card-content>
     </ion-card>
   </div>
