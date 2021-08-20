@@ -16,6 +16,8 @@ import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms'
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -28,7 +30,7 @@ import { ReactiveFormsModule } from '@angular/forms';
             ReactiveFormsModule
           ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-              AngularFirestoreModule],
+              AngularFirestoreModule, SocialSharing],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

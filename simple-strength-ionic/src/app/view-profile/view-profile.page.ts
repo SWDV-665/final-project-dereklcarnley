@@ -7,6 +7,8 @@ import { LoadingService } from '../services/ui/loading.service';
 import { AlertController } from '@ionic/angular';
 import { ORM } from '../models/one-rep-maxes.interface';
 
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+
 import * as BenchStandards from "../data/bench-standards.json";
 import * as DeadliftStandards from "../data/deadlift-standards.json";
 import * as OHPStandards from "../data/ohp-standards.json";
@@ -36,7 +38,8 @@ export class ViewProfilePage implements OnInit {
     private router: Router,
     private firestoreService: FirestoreService,
     private alertCtrl: AlertController,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private socialSharing: SocialSharing
   ) { }
 
   async ngOnInit() {
@@ -269,4 +272,25 @@ export class ViewProfilePage implements OnInit {
     await alert.present();
   }
 
+
+  async shareMaxes() {
+    console.log("Sharing ORMs");
+
+    //insert toast present here
+
+    let message = 
+    `My One-Rep Maxes:\n
+    Bench Press - ${this.ORMs.BenchMax}\n
+    Deadlift - ${this.ORMs.DeadliftMax}\n
+    Overhead Press - ${this.ORMs.OHPMax}\n
+    Bent-Over Row - ${this.ORMs.RowMax}\n
+    Squat - ${this.ORMs.SquatMax}`;
+    let subject = "Shared via Simple Strength app";
+
+    this.socialSharing.share(message, subject).then(() => {
+      console.log("Shared successfully!")
+    }).catch((error) => {
+      console.error("Error while sharing.", error)
+    });
+  };
 }
