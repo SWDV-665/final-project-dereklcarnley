@@ -8,13 +8,13 @@ import { ToastController } from '@ionic/angular';
 import { ORM } from '../models/one-rep-maxes.interface';
 
 @Component({
-  selector: 'app-workout-strength',
-  templateUrl: './workout-strength.page.html',
-  styleUrls: ['./workout-strength.page.scss'],
+  selector: 'app-workout-general',
+  templateUrl: './workout-general.page.html',
+  styleUrls: ['./workout-general.page.scss'],
 })
-export class WorkoutStrengthPage implements OnInit {
+export class WorkoutGeneralPage implements OnInit {
 
-  strengthWorkoutForm: FormGroup;
+  generalWorkoutForm: FormGroup;
 
   public ORMs: ORM;
 
@@ -32,7 +32,7 @@ export class WorkoutStrengthPage implements OnInit {
               private toastCtrl: ToastController) { }
 
   ngOnInit() {
-    this.strengthWorkoutForm = this.formBuilder.group({
+    this.generalWorkoutForm = this.formBuilder.group({
       benchResponse: ['0', [Validators.required]],
       deadliftResponse: ['0', [Validators.required]],
       ohpResponse: ['0', [Validators.required]],
@@ -107,15 +107,16 @@ export class WorkoutStrengthPage implements OnInit {
     return remainder >= 1.25 ? ((number - remainder) + 2.5) : (number - remainder);
   };
 
-  //increment by 2.5 if user replies 'complete'
-  //decrement by 2.5 if user replies 'too heavy'
+  //increment by 1 if user replies 'complete'
+  //decrement by 1 if user replies 'too heavy'
+  //increments less than strength-focused workouts
   incrementOrDecrementMax(response:string, maxType:string){
-    if (this.strengthWorkoutForm.value[response] == '1'){
+    if (this.generalWorkoutForm.value[response] == '1'){
       //increment max
-      return Number(this.ORMs[maxType]) + 2.5;
-    } else if (this.strengthWorkoutForm.value[response] == '3'){
+      return Number(this.ORMs[maxType]) + 1;
+    } else if (this.generalWorkoutForm.value[response] == '3'){
       //decrement max
-      return Number(this.ORMs[maxType]) - 2.5;
+      return Number(this.ORMs[maxType]) - 1;
     } else {
       return Number(this.ORMs[maxType]);
     };
@@ -123,11 +124,11 @@ export class WorkoutStrengthPage implements OnInit {
 
   //checks for completed sets on any one of the prescribed lifts
   checkForSuccess() {
-    if (this.strengthWorkoutForm.value.benchResponse == '1' ||
-        this.strengthWorkoutForm.value.deadliftResponse == '1' ||
-        this.strengthWorkoutForm.value.ohpResponse == '1' ||
-        this.strengthWorkoutForm.value.rowResponse == '1' ||
-        this.strengthWorkoutForm.value.squatResponse == '1'){ 
+    if (this.generalWorkoutForm.value.benchResponse == '1' ||
+        this.generalWorkoutForm.value.deadliftResponse == '1' ||
+        this.generalWorkoutForm.value.ohpResponse == '1' ||
+        this.generalWorkoutForm.value.rowResponse == '1' ||
+        this.generalWorkoutForm.value.squatResponse == '1'){ 
       return true;
     }
   }
@@ -138,7 +139,7 @@ export class WorkoutStrengthPage implements OnInit {
   2) increment or decrement user maxes based on their responses, and
   3) update user ORMs in the database
   --------------*/ 
-  finishStrengthWorkout() {
+  finishGeneralWorkout() {
     console.log("Workout finished.");
     if (this.checkForSuccess()) {
       this.presentToast('Great Workout! Maxes increased.');
@@ -156,4 +157,5 @@ export class WorkoutStrengthPage implements OnInit {
         this.router.navigateByUrl('');
       });
   }
+
 }

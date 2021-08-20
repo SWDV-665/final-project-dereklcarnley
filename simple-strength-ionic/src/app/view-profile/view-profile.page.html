@@ -42,9 +42,9 @@
           <p>Bent-Over Row: {{ORMs?.RowMax}}</p>
           <p>Squat: {{ORMs?.SquatMax}}</p>
         </div>
-        <ion-button id="suggestMaxButton" color="primary" (click)="suggestMaxes()">Suggest ORMs</ion-button>
-        <ion-button id="setMaxButton" color="secondary" (click)="manuallySetMaxes()">Manually Set ORMs</ion-button>
-        <ion-button id="deleteMaxButton" color="danger" (click)="deleteMaxes()">Delete</ion-button>
+        <ion-button color="primary" (click)="confirmSuggestMaxes()">Suggest ORMs</ion-button>
+        <ion-button color="secondary" (click)="manuallySetMaxes()">Manually Set ORMs</ion-button>
+        <ion-button color="danger" (click)="deleteMaxes()">Delete</ion-button>
       </ion-card-content>
     </ion-card>
   </div>

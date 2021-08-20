@@ -1,17 +1,17 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Workout Tracking - Hypertrophy</ion-title>
+    <ion-title>Workout Tracking - General Fitness</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-header collapse="condense">
     <ion-toolbar>
-      <h3>Workout Tracking - Hypertrophy</h3>
+      <h3>Workout Tracking - General Fitness</h3>
     </ion-toolbar>
   </ion-header>
 
-  <form [formGroup]="hypertrophyWorkoutForm" (ngSubmit)="finishHypertrophyWorkout()">
+  <form [formGroup]="generalWorkoutForm" (ngSubmit)="finishGeneralWorkout()">
     <ion-list>
       <!----------------------------------------------------->
       <!-------------------- BENCH PRESS -------------------->
@@ -19,7 +19,7 @@
       <ion-radio-group formControlName="benchResponse">
         <ion-item button (click)="toggleBenchDiv()" detail detail-icon="chevron-down">
           <ion-list-header>
-            <ion-label><h1><strong>Bench Press:</strong></h1><h2>{{(plateIncrementRound(ORMs?.BenchMax * 0.65))}} pounds - 4 sets of 7-12 reps</h2></ion-label>
+            <ion-label><h1><strong>Bench Press:</strong></h1><h2>{{(plateIncrementRound(ORMs?.BenchMax * 0.45))}} pounds - 3 sets of 15-20 reps</h2></ion-label>
           </ion-list-header>
         </ion-item>
         <div [hidden]="benchDiv">
@@ -51,7 +51,7 @@
       <ion-radio-group formControlName="deadliftResponse">
         <ion-item button (click)="toggleDeadliftDiv()" detail detail-icon="chevron-down">
           <ion-list-header>
-            <ion-label><h1><strong>Deadlift:</strong></h1><h2>{{(plateIncrementRound(ORMs?.DeadliftMax * 0.65))}} pounds - 4 sets of 7-12 reps</h2></ion-label>
+            <ion-label><h1><strong>Deadlift:</strong></h1><h2>{{(plateIncrementRound(ORMs?.DeadliftMax * 0.45))}} pounds - 3 sets of 15-20 reps</h2></ion-label>
           </ion-list-header>
         </ion-item>
         <div [hidden]="deadliftDiv">
@@ -83,7 +83,7 @@
       <ion-radio-group formControlName="ohpResponse">
         <ion-item button (click)="toggleOHPDiv()" detail detail-icon="chevron-down">
           <ion-list-header>
-            <ion-label><h1><strong>Overhead Press:</strong></h1><h2>{{(plateIncrementRound(ORMs?.OHPMax * 0.65))}} pounds - 4 sets of 7-12 reps</h2></ion-label>
+            <ion-label><h1><strong>Overhead Press:</strong></h1><h2>{{(plateIncrementRound(ORMs?.OHPMax * 0.45))}} pounds - 3 sets of 15-20 reps</h2></ion-label>
           </ion-list-header>
         </ion-item>
         <div [hidden]="ohpDiv">
@@ -115,7 +115,7 @@
       <ion-radio-group formControlName="squatResponse">
         <ion-item button (click)="toggleSquatDiv()" detail detail-icon="chevron-down">
           <ion-list-header>
-            <ion-label><h1><strong>Squat:</strong></h1><h2>{{(plateIncrementRound(ORMs?.SquatMax * 0.65))}} pounds - 4 sets of 7-12 reps</h2></ion-label>
+            <ion-label><h1><strong>Squat:</strong></h1><h2>{{(plateIncrementRound(ORMs?.SquatMax * 0.45))}} pounds - 3 sets of 15-20 reps</h2></ion-label>
           </ion-list-header>
         </ion-item>
         <div [hidden]="squatDiv">
@@ -147,7 +147,7 @@
       <ion-radio-group formControlName="rowResponse">
         <ion-item button (click)="toggleRowDiv()" detail detail-icon="chevron-down">
           <ion-list-header>
-            <ion-label><h1><strong>Bent-Over Row:</strong></h1><h2>{{(plateIncrementRound(ORMs?.RowMax * 0.65))}} pounds - 4 sets of 7-12 reps</h2></ion-label>
+            <ion-label><h1><strong>Bent-Over Row:</strong></h1><h2>{{(plateIncrementRound(ORMs?.RowMax * 0.45))}} pounds - 3 sets of 15-20 reps</h2></ion-label>
           </ion-list-header>
         </ion-item>
         <div [hidden]="rowDiv">
@@ -176,5 +176,4 @@
     <ion-button type="submit" color="primary" size="large" expand="block">Finish Workout</ion-button>
     <ion-button color="secondary" expand="block" [routerLink]="['']">Back to Dashboard</ion-button>
   </form>
-
 </ion-content>

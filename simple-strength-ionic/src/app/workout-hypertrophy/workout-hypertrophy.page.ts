@@ -18,7 +18,7 @@ export class WorkoutHypertrophyPage implements OnInit {
 
   public ORMs: ORM;
 
-  benchDiv=false;
+  benchDiv=true;
   deadliftDiv=true;
   ohpDiv=true;
   squatDiv=true;

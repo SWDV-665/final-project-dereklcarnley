@@ -46,6 +46,10 @@ const routes: Routes = [
   {
     path: 'workout-hypertrophy',
     loadChildren: () => import('./workout-hypertrophy/workout-hypertrophy.module').then( m => m.WorkoutHypertrophyPageModule)
+  },
+  {
+    path: 'workout-general',
+    loadChildren: () => import('./workout-general/workout-general.module').then( m => m.WorkoutGeneralPageModule)
   }
 ];
 

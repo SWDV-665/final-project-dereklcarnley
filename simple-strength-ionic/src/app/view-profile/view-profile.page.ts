@@ -102,6 +102,28 @@ export class ViewProfilePage implements OnInit {
     else {return max};
   }
 
+  async confirmSuggestMaxes():Promise<void> {
+    const alert = await this.alertCtrl.create({
+      message: `Are you sure you want to suggest ORMs based on your profile? This will overwrite your current maxes.`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: blah => {
+            console.log('Confirm Cancel: blah');
+          },
+        },
+        {
+          text: 'Confirm',
+          handler: () => {
+            this.suggestMaxes();
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
   /*------
   Suggest ORMs based on Strength Level's crowdsourced standards.
   Great for beginners who don't know what weight to start with.
