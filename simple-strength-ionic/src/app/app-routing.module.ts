@@ -42,6 +42,10 @@ const routes: Routes = [
   {
     path: 'workout-strength',
     loadChildren: () => import('./workout-strength/workout-strength.module').then( m => m.WorkoutStrengthPageModule)
+  },
+  {
+    path: 'workout-hypertrophy',
+    loadChildren: () => import('./workout-hypertrophy/workout-hypertrophy.module').then( m => m.WorkoutHypertrophyPageModule)
   }
 ];
 
