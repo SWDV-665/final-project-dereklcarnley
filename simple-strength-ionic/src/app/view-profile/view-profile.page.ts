@@ -58,6 +58,7 @@ export class ViewProfilePage implements OnInit {
     }
   }
 
+  //confirm delete with alert, then call firestore service
   async deleteProfile():Promise<void> {
     const id = this.authService.getUserID();
 
@@ -90,7 +91,8 @@ export class ViewProfilePage implements OnInit {
     return remainder >= 5 ? ((number - remainder) + 10) : (number - remainder);
   };
 
-  //used to calculate maxes, account for age
+  //used to calculate maxes, account for age group.
+  //strength level's ORM data provides these percentages
   accountForAge(max:number) {
     console.log("Accounting for age group...");
     const age = this.profile.Age;
@@ -105,6 +107,7 @@ export class ViewProfilePage implements OnInit {
     else {return max};
   }
 
+  //get confirmation before overwriting maxes
   async confirmSuggestMaxes():Promise<void> {
     const alert = await this.alertCtrl.create({
       message: `Are you sure you want to suggest ORMs based on your profile? This will overwrite your current maxes.`,
@@ -158,6 +161,7 @@ export class ViewProfilePage implements OnInit {
           bodyweight = this.roundToNearestTen(this.profile.Bodyweight);
         };
         
+      //get all 5 maxes
       console.log("Getting bench press max...");
       console.log(this.BenchStandards[sex][bodyweight][fitnessLevel]);
       var benchMax = this.accountForAge(this.BenchStandards[sex][bodyweight][fitnessLevel]);
@@ -178,11 +182,13 @@ export class ViewProfilePage implements OnInit {
       console.log(this.SquatStandards[sex][bodyweight][fitnessLevel]);
       var squatMax = this.accountForAge(this.SquatStandards[sex][bodyweight][fitnessLevel]);
     
+      //call firestore to save ORMs
       this.loadingService.presentLoading('Setting One-Rep Maxes...');
       this.firestoreService.createORM(benchMax, deadliftMax, ohpMax, rowMax, squatMax);
       }
     }
 
+    //confirm delete with alert
     async deleteMaxes():Promise<void> {
       const id = this.authService.getUserID();
   
@@ -275,8 +281,6 @@ export class ViewProfilePage implements OnInit {
 
   async shareMaxes() {
     console.log("Sharing ORMs");
-
-    //insert toast present here
 
     let message = 
     `My One-Rep Maxes:\n

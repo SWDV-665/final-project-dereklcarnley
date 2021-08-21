@@ -16,6 +16,7 @@ export class FirestoreService {
               public authService:AuthenticationService,
               private router: Router) { }
 
+  //create user profile with Age, Bodyweight, FitnessLevel, and Sex (user input)
   createProfile(
     Age: number,
     Bodyweight: number,
@@ -33,15 +34,16 @@ export class FirestoreService {
     });
   }
 
+  //get profile data by id
   getProfileData(id: string): Observable<Profile> {
     console.log("Getting Profile Data for User ID: " + id);
     return this.firestore.collection('userProfiles').doc<Profile>(id).valueChanges();
   }
 
+  //delete profile data by id
   deleteProfileData(id: string): Promise<void> {
     return this.firestore.doc(`userProfiles/${id}`).delete()
     .then((res) => {
-      // Do something here
       console.log("Profile deleted.")
       this.router.navigate(['']);
     }).catch((error) => {
@@ -49,6 +51,7 @@ export class FirestoreService {
     })
   }
 
+  //create user ORM data
   createORM(
     BenchMax: number,
     DeadliftMax: number,
@@ -68,15 +71,16 @@ export class FirestoreService {
     });
   }
 
+  //get ORM data by id
   getORMData(id: string): Observable<ORM> {
     console.log("Getting ORM Data for User ID: " + id);
     return this.firestore.collection('userORMs').doc<ORM>(id).valueChanges();
   }
 
+  //delete ORM data by id
   deleteORMData(id: string): Promise<void> {
     return this.firestore.doc(`userORMs/${id}`).delete()
     .then((res) => {
-      // Do something here
       console.log("ORM data deleted.")
       this.router.navigate(['']);
     }).catch((error) => {

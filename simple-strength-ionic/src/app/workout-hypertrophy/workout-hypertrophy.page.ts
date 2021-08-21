@@ -109,7 +109,7 @@ export class WorkoutHypertrophyPage implements OnInit {
 
   //increment by 1.5 if user replies 'complete'
   //decrement by 1.5 if user replies 'too heavy'
-  //increments less than strength-focused workouts
+  //increments less than strength-focused workouts, but more than general workouts
   incrementOrDecrementMax(response:string, maxType:string){
     if (this.hypertrophyWorkoutForm.value[response] == '1'){
       //increment max

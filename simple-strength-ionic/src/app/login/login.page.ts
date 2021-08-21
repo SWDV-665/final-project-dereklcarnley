@@ -17,6 +17,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
 
+  //call authentication service for sign in
   logIn(email, password) {
     this.authService.SignIn(email.value, password.value)
       .then((res) => {

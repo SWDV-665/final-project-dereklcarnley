@@ -109,6 +109,7 @@ export class WorkoutStrengthPage implements OnInit {
 
   //increment by 2.5 if user replies 'complete'
   //decrement by 2.5 if user replies 'too heavy'
+  //increments more than other workout types
   incrementOrDecrementMax(response:string, maxType:string){
     if (this.strengthWorkoutForm.value[response] == '1'){
       //increment max
